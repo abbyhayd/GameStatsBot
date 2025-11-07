@@ -1,11 +1,15 @@
 from google import genai
 from dotenv import load_dotenv
-import discord
-from discord.ext import commands
 import os
 
+import discord
+from discord.ext import commands
+
+import asyncio
+import fortnite_api
+
 load_dotenv()
-client = genai.Client()
+#client = genai.Client()
 
 # Gemini prompting
 # prompt = "Who won the 2025 World Series?"
@@ -21,9 +25,20 @@ client = genai.Client()
 # else:
 #     print("broke")
 
+#Fortnite test
+# async def main() -> None:
+#     async with fortnite_api.Client() as client:
+#         all_cosmetics: fortnite_api.CosmeticsAll = await client.fetch_cosmetics_all()
+
+#         for br_cosmetic in all_cosmetics.br:
+#             print(br_cosmetic.name)
+
+# if __name__ == "__main__":
+#     asyncio.run(main())
+
 
 # Discord bot work
-token = os.getenv('DISCORD_TOKEN')
+discord_token = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -42,7 +57,6 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if message.content.startswith('!hello'):
-        await message.channel.send('Hello!')
+        await message.channel.send("hello!")
 
-
-bot.run(token)
+bot.run(discord_token)
