@@ -43,6 +43,7 @@ class FortniteCog(commands.Cog):
         name="fortnite-total-cosmetics",
         description="Get the total number of cosmetics in Fortnite.",
     )
+    @commands.check(in_target_channel)
     async def total_cosmetics(self, ctx) -> None:
         async with ctx.typing():
             bot= ctx.bot
