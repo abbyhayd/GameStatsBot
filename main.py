@@ -18,13 +18,6 @@ async def main() -> None:
     async with fortnite_client, bot:
         await bot.start(os.getenv('DISCORD_TOKEN'))
 
-    @bot.command()
-    @commands.is_owner()
-    async def reload(ctx, extension):
-        bot.reload_extension(f"cogs.{extension}")
-        embed = discord.Embed(title='Reload', description=f'{extension} successfully reloaded', color=0xff00c8)
-        await ctx.send(embed=embed)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

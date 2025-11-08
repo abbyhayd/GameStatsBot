@@ -24,12 +24,3 @@ class MyBot(commands.Bot):
         await self.load_extension("cogs.events")
         await self.load_extension("cogs.fortnite")
 
-    @commands.group(name='reload', hidden=True, invoke_without_command=True)
-    async def _reload(self, ctx, *, module: str):
-        """Reloads a module."""
-        try:
-            await self.bot.reload_extension(module)
-        except commands.ExtensionError as e:
-            await ctx.send(f'{e.__class__.__name__}: {e}')
-        else:
-            await ctx.send('\N{OK HAND SIGN}')
