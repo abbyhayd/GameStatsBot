@@ -3,7 +3,7 @@ from discord.ext import commands
 import fortnite_api
 from dotenv import load_dotenv
 import os
-from cogs.events import *
+from cogs.bot_commands import *
 from cogs.fortnite import *
 
 
@@ -22,6 +22,5 @@ class MyBot(commands.Bot):
 
     async def setup_hook(self):
         await self.load_extension("cogs.bot_commands")
-        await self.load_extension("cogs.events")
         await self.load_extension("cogs.fortnite")
 
