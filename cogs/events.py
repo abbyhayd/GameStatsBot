@@ -16,6 +16,12 @@ class Events(commands.Cog):
         if message.content.startswith('!hello'):
             await message.channel.send("hello!")
 
+    async def cog_load(self):
+        print(f"{self.__class__.__name__} loaded!")
+
+    async def cog_unload(self):
+        print(f"{self.__class__.__name__} unloaded!")
+
         
 async def setup(bot):
     await bot.add_cog(Events(bot))

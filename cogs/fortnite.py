@@ -27,6 +27,12 @@ class FortniteCog(commands.Cog):
                 f"The total number of cosmetics in Fortnite is: {total_cosmetics}",
                 ephemeral=True,
             )
+    
+    async def cog_load(self):
+        print(f"{self.__class__.__name__} loaded!")
+
+    async def cog_unload(self):
+        print(f"{self.__class__.__name__} unloaded!")
 
 async def setup(bot):
     await bot.add_cog(FortniteCog(bot))
