@@ -12,23 +12,27 @@ class FortniteCog(commands.Cog):
         bot = ctx.bot
         fortnite_client : fortnite_api.Client = bot.fortnite_client
 
-        #put in player not found exception
+        try:
+            player_info = await fortnite_client.fetch_br_stats(name=user)
 
-        player_info = await fortnite_client.fetch_br_stats(name=user)
-        stats = player_info.inputs and player_info.inputs.all
+        except fortnite_api.NotFound:
+            await ctx.send("Username not found")
+            
+        else:
+            stats = player_info.inputs and player_info.inputs.all
 
-        total_wins = stats.overall.wins
-        total_kills = stats.overall.kills
-        total_deaths = stats.overall.deaths
-        total_matches = stats.overall.matches
+            total_wins = stats.overall.wins
+            total_kills = stats.overall.kills
+            total_deaths = stats.overall.deaths
+            total_matches = stats.overall.matches
 
-        await ctx.send(
-            f"The overall Battle Royal Stats for {user}: \n"
-            f"Total wins: {total_wins}\n"
-            f"Total kills: {total_kills}\n"
-            f"Total deaths: {total_deaths}\n"
-            f"Total matches: {total_matches}\n"
-        )
+            await ctx.send(
+                f"The overall Battle Royal Stats for {user}: \n"
+                f"Total wins: {total_wins}\n"
+                f"Total kills: {total_kills}\n"
+                f"Total deaths: {total_deaths}\n"
+                f"Total matches: {total_matches}\n"
+            )
 
 
     @commands.hybrid_command(
