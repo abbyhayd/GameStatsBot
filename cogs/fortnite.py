@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 from discord.ext import commands
-from bot import MyBot
 import fortnite_api
 
 class FortniteCog(commands.Cog):
@@ -8,15 +7,15 @@ class FortniteCog(commands.Cog):
         self.bot = bot
 
     @commands.command(name="fortnite-stats", description="Get requested player stats")
-    async def player_stats(self, ctx, user, squad_type) -> None:
-        bot : MyBot = ctx.bot
+    async def player_stats(self, ctx, user) -> None:
+        bot = ctx.bot
         fortnite_client : fortnite_api.Client = bot.fortnite_client
 
         player_info = await fortnite_client.fetch_br_stats(user)
 
         await ctx.send(
             f"The Battle Royal Stats for {user} are: "
-
+            f"Level: {player_info.data.level}"
         )
 
 
@@ -26,7 +25,7 @@ class FortniteCog(commands.Cog):
     )
     async def total_cosmetics(self, ctx) -> None:
         async with ctx.typing():
-            bot : MyBot= ctx.bot
+            bot= ctx.bot
             fortnite_client : fortnite_api.Client = bot.fortnite_client
 
             all_cosmetics = await fortnite_client.fetch_cosmetics_all()
