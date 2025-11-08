@@ -1,22 +1,32 @@
 from dotenv import load_dotenv
 from discord.ext import commands
+from bot import MyBot
 import fortnite_api
 
 class FortniteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="stats", description="Get requested player stats")
-    async def player_stats(self, ctx) -> None:
-        pass
+    @commands.command(name="fortnite-stats", description="Get requested player stats")
+    async def player_stats(self, ctx, user, squad_type) -> None:
+        bot : MyBot = ctx.bot
+        fortnite_client : fortnite_api.Client = bot.fortnite_client
+
+        player_info = await fortnite_client.fetch_br_stats(user)
+
+        await ctx.send(
+            f"The Battle Royal Stats for {user} are: "
+
+        )
+
 
     @commands.hybrid_command(
-        name="total-cosmetics",
+        name="fortnite-total-cosmetics",
         description="Get the total number of cosmetics in Fortnite.",
     )
     async def total_cosmetics(self, ctx) -> None:
         async with ctx.typing():
-            bot = ctx.bot
+            bot : MyBot= ctx.bot
             fortnite_client : fortnite_api.Client = bot.fortnite_client
 
             all_cosmetics = await fortnite_client.fetch_cosmetics_all()
