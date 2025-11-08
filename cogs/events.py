@@ -17,7 +17,7 @@ class Events(commands.Cog):
             await message.channel.send("hello!")
 
         if message.content.startswith('!test'):
-            await message.channel.send("it works!")
+            await message.channel.send("it definitely works!")
 
     async def cog_load(self):
         print(f"{self.__class__.__name__} loaded!")

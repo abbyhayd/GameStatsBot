@@ -21,6 +21,7 @@ class MyBot(commands.Bot):
         self.fortnite_client = fortnite_client
 
     async def setup_hook(self):
+        await self.load_extension("cogs.bot_commands")
         await self.load_extension("cogs.events")
         await self.load_extension("cogs.fortnite")
 
