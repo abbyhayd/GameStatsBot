@@ -17,7 +17,7 @@ class FortniteCog(commands.Cog):
 
         except fortnite_api.NotFound:
             await ctx.send("Username not found")
-            
+
         else:
             stats = player_info.inputs and player_info.inputs.all
 
@@ -28,10 +28,10 @@ class FortniteCog(commands.Cog):
 
             await ctx.send(
                 f"The overall Battle Royal Stats for {user}: \n"
-                f"Total wins: {total_wins}\n"
-                f"Total kills: {total_kills}\n"
-                f"Total deaths: {total_deaths}\n"
-                f"Total matches: {total_matches}\n"
+                f":trophy: Total wins: {total_wins}\n"
+                f":drop_of_blood: Total kills: {total_kills}\n"
+                f":skull_crossbones: Total deaths: {total_deaths}\n"
+                f":video_game: Total matches: {total_matches}\n"
             )
 
 
