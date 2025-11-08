@@ -8,13 +8,9 @@ class FortniteCog(commands.Cog):
         self.bot = bot
 
     @commands.command(name="fortnite-stats", description="Get game stats for player")
-    async def player_stats(self, ctx, user, game_type) -> None:        
+    async def player_stats(self, ctx, user) -> None:        
         bot = ctx.bot
         fortnite_client : fortnite_api.Client = bot.fortnite_client
-
-        if game_type not in ["solo", "duos", "trios", "squads"]:
-            await ctx.send("Provide valid game type (solo, duos, trios, squads)")
-            return
 
         #put in player not found exception
 
