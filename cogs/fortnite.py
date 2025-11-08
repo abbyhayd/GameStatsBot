@@ -3,6 +3,8 @@ from discord.ext import commands
 import fortnite_api
 
 class FortniteCog(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
     @commands.command(name="stats", description="Get requested player stats")
     async def player_stats(self, ctx) -> None:
@@ -25,3 +27,6 @@ class FortniteCog(commands.Cog):
                 f"The total number of cosmetics in Fortnite is: {total_cosmetics}",
                 ephemeral=True,
             )
+
+async def setup(bot):
+    await bot.add_cog(FortniteCog(bot))

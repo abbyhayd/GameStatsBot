@@ -12,5 +12,10 @@ class Events(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user:
             return
+        
         if message.content.startswith('!hello'):
             await message.channel.send("hello!")
+
+        
+async def setup(bot):
+    await bot.add_cog(Events(bot))

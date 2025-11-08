@@ -9,7 +9,6 @@ import asyncio
 import fortnite_api
 
 from bot import *
-from commands import *
 
 async def main() -> None:
     fortnite_client = fortnite_api.Client(api_key = os.getenv('FORTNITE_KEY'))
