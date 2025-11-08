@@ -7,13 +7,17 @@ class FortniteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def in_target_channel(ctx):
+        return ctx.channel.id == 1436644620238061670
+
     @commands.command(name="fortnite-stats", description="Get game stats for player")
+    @commands.check(in_target_channel)
     async def player_stats(self, ctx, user) -> None:        
         bot = ctx.bot
         fortnite_client : fortnite_api.Client = bot.fortnite_client
 
         try:
-            player_info = await fortnite_client.fetch_br_stats(name=user)
+            player_info : fortnite_api.BrPlayerStats = await fortnite_client.fetch_br_stats(name=user)
 
         except fortnite_api.NotFound:
             await ctx.send("Username not found")
