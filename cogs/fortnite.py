@@ -38,7 +38,6 @@ class FortniteCog(commands.Cog):
                 f":video_game: Total matches: {total_matches}\n"
             )
 
-
     @commands.hybrid_command(
         name="fortnite-total-cosmetics",
         description="Get the total number of cosmetics in Fortnite.",
