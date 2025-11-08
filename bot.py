@@ -24,7 +24,12 @@ class MyBot(commands.Bot):
         await self.load_extension("cogs.events")
         await self.load_extension("cogs.fortnite")
 
-    # async def reload(ctx, extension):
-    #     bot.reload_extension(f"cogs.{extension}")
-    #     embed = discord.Embed(title='Reload', description=f'{extension} successfully reloaded', color=0xff00c8)
-    #     await ctx.send(embed=embed)
+    @commands.group(name='reload', hidden=True, invoke_without_command=True)
+    async def _reload(self, ctx, *, module: str):
+        """Reloads a module."""
+        try:
+            await self.bot.reload_extension(module)
+        except commands.ExtensionError as e:
+            await ctx.send(f'{e.__class__.__name__}: {e}')
+        else:
+            await ctx.send('\N{OK HAND SIGN}')
