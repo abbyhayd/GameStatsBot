@@ -19,14 +19,10 @@ class MyBot(commands.Bot):
         )
 
         self.fortnite_client = fortnite_client
-        # self.load_extension("cogs.events")
-        # self.load_extension("cogs.fortnite")
 
-    
-
-    # async def setup_hook(self):
-    #     await self.add_cog(Events(self))
-    #     await self.add_cog(FortniteCog())
+    async def setup_hook(self):
+        await self.load_extension("cogs.events")
+        await self.load_extension("cogs.fortnite")
 
     # async def reload(ctx, extension):
     #     bot.reload_extension(f"cogs.{extension}")
