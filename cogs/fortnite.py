@@ -10,14 +10,17 @@ class FortniteCog(commands.Cog):
     def in_target_channel(ctx):
         return ctx.channel.id == 1436644620238061670
 
-    @commands.command(name="fortnite-stats", description="Get game stats for player")
+    @commands.command(
+            name="fortnite-stats", 
+            brief="Get game stats for player", 
+            description="Gets the overall stats for a player given their username")
     @commands.check(in_target_channel)
-    async def player_stats(self, ctx, user) -> None:        
+    async def player_stats(self, ctx, username) -> None:        
         bot = ctx.bot
         fortnite_client : fortnite_api.Client = bot.fortnite_client
 
         try:
-            player_info : fortnite_api.BrPlayerStats = await fortnite_client.fetch_br_stats(name=user)
+            player_info : fortnite_api.BrPlayerStats = await fortnite_client.fetch_br_stats(name=username)
 
         except fortnite_api.NotFound:
             await ctx.send("Username not found")
@@ -31,7 +34,7 @@ class FortniteCog(commands.Cog):
             total_matches = stats.overall.matches
 
             await ctx.send(
-                f"The overall Battle Royal Stats for {user}: \n"
+                f"The overall Battle Royal Stats for {username}: \n"
                 f":trophy: Total wins: {total_wins}\n"
                 f":drop_of_blood: Total kills: {total_kills}\n"
                 f":skull_crossbones: Total deaths: {total_deaths}\n"
@@ -40,7 +43,8 @@ class FortniteCog(commands.Cog):
 
     @commands.hybrid_command(
         name="fortnite-total-cosmetics",
-        description="Get the total number of cosmetics in Fortnite.",
+        brief="Get total number of cosmetics",
+        description="Gets the total number of cosmetics in the Fortnite shop"
     )
     @commands.check(in_target_channel)
     async def total_cosmetics(self, ctx) -> None:
