@@ -6,7 +6,13 @@ import importlib
 class botCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
+    
+    async def cog_load(self):
+        print(f"{self.__class__.__name__} loaded!")
+
+    async def cog_unload(self):
+        print(f"{self.__class__.__name__} unloaded!")
+
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, extension):
