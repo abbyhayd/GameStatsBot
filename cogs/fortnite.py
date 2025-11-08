@@ -2,26 +2,6 @@ from dotenv import load_dotenv
 from discord.ext import commands
 import fortnite_api
 
-def get_total_wins(stats: fortnite_api.BrPlayerStats, game_type) -> int:
-        all_inputs = stats.inputs and stats.inputs.all
-        if all_inputs is None:
-            return 0
-        
-        total_wins = 0
-        
-        match game_type:
-            case "solo":
-                total_wins = all_inputs.solo
-            case "duos":
-                total_wins = all_inputs.duo
-            case "trios":
-                total_wins = all_inputs.trio
-            case "squads":
-                total_wins = all_inputs.squad
-        if total_wins is None:
-            total_wins = 0
-
-        return total_wins.wins
 
 class FortniteCog(commands.Cog):
     def __init__(self, bot):
@@ -39,12 +19,19 @@ class FortniteCog(commands.Cog):
         #put in player not found exception
 
         player_info = await fortnite_client.fetch_br_stats(name=user)
+        stats = player_info.inputs and player_info.inputs.all
 
-        total_wins = get_total_wins(player_info, game_type)
+        total_wins = stats.overall.wins
+        total_kills = stats.overall.kills
+        total_deaths = stats.overall.deaths
+        total_matches = stats.overall.matches
 
         await ctx.send(
-            f"The Battle Royal Stats for {user} in {game_type}: \n"
-            f"Total wins: {total_wins}"
+            f"The overall Battle Royal Stats for {user}: \n"
+            f"Total wins: {total_wins}\n"
+            f"Total kills: {total_kills}\n"
+            f"Total deaths: {total_deaths}\n"
+            f"Total matches: {total_matches}\n"
         )
 
 
